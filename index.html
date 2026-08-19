@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Revamp & Business Growth Proposals | Interactive Slide Deck</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased select-none">
+
+  <!-- Main Presentation Shell -->
+  <div class="presentation-viewport">
+
+    <!-- Slide Progress Bar -->
+    <div class="slide-progress-track">
+      <div id="slide-progress" class="slide-progress-fill" style="width: 0%;"></div>
+    </div>
+
+    <!-- Header Navigation & Controls -->
+    <header class="top-deck-header">
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md shadow-blue-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="hidden sm:block">
+          <div class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+            <span>Website Revamp Proposals</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-mono font-bold border border-blue-200">9 Portals</span>
+          </div>
+          <div class="text-[11px] text-slate-500 font-medium" id="current-category-badge">Executive Overview</div>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills (Scrollable on tablet/desktop) -->
+      <div class="hidden xl:flex items-center gap-1.5 overflow-x-auto max-w-3xl px-2 py-1" id="category-pills">
+        <!-- Injected dynamically by app.js -->
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Quick Proposal Dropdown for Mobile / Compact -->
+        <select id="category-select" class="xl:hidden bg-white border border-slate-300 text-xs text-slate-800 font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-blue-600 max-w-[160px] truncate shadow-xs">
+          <!-- Injected dynamically -->
+        </select>
+
+        <!-- Grid View (G) -->
+        <button id="grid-toggle-btn" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs flex items-center gap-1 font-semibold" title="Slide Overview Grid (G)">
+          <svg class="w-4 h-4 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          <span class="hidden md:inline">Overview</span>
+        </button>
+
+        <!-- Speaker Notes Toggle (N) -->
+        <button id="notes-toggle-btn" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs flex items-center gap-1 font-semibold" title="Speaker Notes (N)">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span class="hidden md:inline">Notes</span>
+        </button>
+
+        <!-- Shortcuts Modal Toggle (?) -->
+        <button id="shortcuts-toggle-btn" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-200 text-xs" title="Keyboard Shortcuts (?)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </button>
+
+        <!-- Fullscreen (F) -->
+        <button id="fullscreen-btn" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 border border-slate-200 text-xs" title="Full Screen (F)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Slide Canvas -->
+    <main class="slides-stage" id="slides-stage">
+      <!-- Slides will be rendered dynamically by app.js -->
+    </main>
+
+    <!-- Bottom Deck Controls / Footer -->
+    <footer class="bottom-deck-footer">
+      <!-- Slide Counter & Info -->
+      <div class="flex items-center gap-3">
+        <span id="slide-counter" class="text-xs font-mono font-bold text-slate-800 px-2.5 py-1 rounded bg-slate-100 border border-slate-300">1 / 32</span>
+        <span class="text-xs text-slate-500 hidden sm:inline">Use <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[10px]">←</kbd> <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[10px]">→</kbd> to slide</span>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs border border-slate-200 font-semibold transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span>Export / Print PDF</span>
+        </button>
+
+        <!-- Prev / Next Sliding Navigation -->
+        <div class="flex items-center gap-1.5">
+          <button id="prev-slide-btn" class="px-3.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center gap-1 border border-slate-300 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            <span>Prev</span>
+          </button>
+          <button id="next-slide-btn" class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1 shadow-md shadow-blue-600/20 transition-all">
+            <span>Next</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Proposal Boundary Gating Modal (Stops at end of proposal) -->
+    <div id="boundary-modal" class="modal-backdrop">
+      <div class="bg-white border border-slate-200 rounded-2xl w-11/12 max-w-lg p-6 shadow-2xl space-y-4 text-center">
+        <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto text-xl font-bold">
+          ✓
+        </div>
+        <div id="boundary-text" class="space-y-1">
+          <!-- Injected dynamically -->
+        </div>
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+          <button onclick="window.app.hideBoundaryModal()" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs border border-slate-300">
+            Review Current Proposal
+          </button>
+          <button id="boundary-next-btn" class="w-full sm:w-auto px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md">
+            Proceed to Next Proposal →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Presenter Speaker Notes Drawer -->
+    <div id="notes-drawer" class="notes-drawer">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-2">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-blue-700">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          <span>Speaker Notes (Presenter Mode)</span>
+        </div>
+        <button onclick="window.app.toggleSpeakerNotes()" class="text-slate-400 hover:text-slate-700 text-xs">✕</button>
+      </div>
+      <div id="notes-content" class="text-xs text-slate-700">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Grid Overview Modal (G) -->
+    <div id="grid-modal" class="modal-backdrop">
+      <div class="bg-white border border-slate-200 rounded-2xl w-11/12 max-w-5xl max-h-[85vh] flex flex-col p-6 shadow-2xl">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+          <div>
+            <h3 class="text-lg font-extrabold text-slate-900">Slide Deck Overview (All 9 Proposals)</h3>
+            <p class="text-xs text-slate-500">Jump directly to any slide across the presentation</p>
+          </div>
+          <button onclick="window.app.toggleGridModal()" class="p-2 rounded-lg bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200 text-xs font-bold">✕ Close (Esc)</button>
+        </div>
+        <div class="flex-1 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 pr-1" id="grid-container">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Modal (?) -->
+    <div id="shortcuts-modal" class="modal-backdrop">
+      <div class="bg-white border border-slate-200 rounded-2xl w-11/12 max-w-md p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+          <h3 class="text-base font-bold text-slate-900">Presentation Keyboard Shortcuts</h3>
+          <button onclick="window.app.toggleShortcutsModal()" class="text-slate-400 hover:text-slate-700 text-xs">✕</button>
+        </div>
+        <div class="space-y-2.5 text-xs">
+          <div class="flex items-center justify-between text-slate-700">
+            <span>Next Slide</span>
+            <div class="flex gap-1">
+              <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">Right Arrow</kbd>
+              <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">Space</kbd>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span>Previous Slide</span>
+            <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">Left Arrow</kbd>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span>Full Screen</span>
+            <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">F</kbd>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span>Toggle Speaker Notes</span>
+            <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">N</kbd>
+          </div>
+          <div class="flex items-center justify-between text-slate-700">
+            <span>Slide Overview Grid</span>
+            <kbd class="px-2 py-1 rounded bg-slate-100 border border-slate-300 font-mono text-[11px]">G</kbd>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- App Scripts -->
+  <script src="js/slides-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
